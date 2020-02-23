@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block  body %}
+ <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">ERL</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="{{url_for('home')}}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="{{url_for('AjouterReclmation')}}">Make a request</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="{{url_for('AjouterAdmin')}}">Create admin account</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="{{url_for('logout')}}">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="masthead">
+    <div class="container d-flex h-100 align-items-center"><br><br><br>
+      <div class="mx-auto text-center flex-fill "><br><br>
+            <h1 class="mx-auto my-0 text-uppercase">DASHBOARD</h1> <BR>
+        {% if deleted == True %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <strong>Message deleted successfuly!</strong>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+        {% endif %}
+        <table border="solid" class="table bg-light">
+            <tr>
+                <th>Type</th>
+                <th>Message</th>
+                <th>Delete</th>
+            </tr>
+            {% for n in reclamations %}
+                <tr>
+                    <td>
+                        {{n[1]}}
+                    </td>
+                    <td>
+                        {{n[2]}}
+                    </td>
+                    <td>
+                        <a href="{{url_for( 'deleteReclamation', id=n[0] )}}" class="btn btn-danger">X</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+      </div>
+    </div>
+  </header>
+
+{% endblock %}
